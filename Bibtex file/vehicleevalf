@@ -1,0 +1,23 @@
+% This file was created with JabRef 2.10.
+% Encoding: UTF-8
+
+
+@Article{pelikan2011correlation,
+  Title                    = {Correlation of objective and subjective evaluation of vehicle handling by neural networks},
+  Author                   = {Pelikan, Jan and Steinbauer, Pavel and Valasek, Michael and Ulehla, Jaroslav},
+  Journal                  = {Bulletin of Applied Mechnics},
+  Year                     = {2011},
+  Number                   = {29},
+  Pages                    = {1--4},
+  Volume                   = {8}
+}
+
+@Article{yu2015vehicle,
+  Title                    = {Vehicle handling evaluation models using artificial neural networks},
+  Author                   = {Yu, Rui and Xia, Xiaohui},
+  Journal                  = {Int. J. Control Autom},
+  Year                     = {2015},
+  Pages                    = {249--258},
+  Volume                   = {8}
+}
+
