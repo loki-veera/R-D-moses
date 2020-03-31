@@ -1,2 +1,3 @@
-# R-D-moses
-R&amp;D project for the Moses data
+# Identification of valid measurement data for driving dynamics evaluation
+## Dataset:
+MOSES Data
