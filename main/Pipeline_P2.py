@@ -32,7 +32,7 @@ class pipeline_Part_Two(pipeline_Part_One):
         self.split_values.append(len(labels))
         proc_labels.append(labels[0 : self.split_values[0]])
         proc_labels.append(labels[self.split_values[0] : self.split_values[1]])
-        proc_labels.append(labels[self.split_values[1] : self.split_values[2]])
+        proc_labels.append(labels[self.split_values[1] : self.split_values[-1]])
         return proc_labels
 
     def get_Testrun_Percentage(self, testrun_lbls):
@@ -58,7 +58,7 @@ class pipeline_Part_Two(pipeline_Part_One):
         else:
             return 0
 
-    def get_Percentage_Measurement_Sequence(self, proc_lbls_1, proc_lbls_2, proc_lbls_3):
+    def get_Percentage_Measurement_Sequence(self, file_data, proc_lbls_1, proc_lbls_2, proc_lbls_3):
         """
         This method is used to calculate the percentage of invalid data in all the sectors of a testrun.
         At present this method can only implemented over the 3 testruns in a measurement sequence.
@@ -90,7 +90,14 @@ class pipeline_Part_Two(pipeline_Part_One):
         print()
         print("Total average percentages (invalid): ")
         print(avg_percent)
-        print("Total validity in measurement sequence is: ")
+        print("Total validity in measurement sequence is [defined as weighted average]: ")
+        total_values = np.mean(self.split_values[2: ])
+        t1 = self.split_values[0]/total_values
+        t2 = (self.split_values[1]-self.split_values[0])/total_values
+        t3 = (total_values-self.split_values[1])/total_values
+        valid_percent = ((t1*avg_percent[0])+(t2*avg_percent[1])+(t3*avg_percent[2]))
+        print(100-valid_percent)
+        print("Avegrae value is: ")
         print(100-np.mean(avg_percent))
         valid_percent = 100-(np.mean(avg_percent))
         return valid_percent
@@ -108,6 +115,6 @@ class pipeline_Part_Two(pipeline_Part_One):
         proc_lbls_0 = self.cut_lables(labels[0])
         proc_lbls_2 = self.cut_lables(labels[1])
         proc_lbls_4 = self.cut_lables(labels[2])
-        valid_percentage = self.get_Percentage_Measurement_Sequence(proc_lbls_0, proc_lbls_2, proc_lbls_4)
+        valid_percentage = self.get_Percentage_Measurement_Sequence(filedata, proc_lbls_0, proc_lbls_2, proc_lbls_4)
         return valid_percentage
 

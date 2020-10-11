@@ -33,6 +33,7 @@ class pipeline_Part_One():
             data : List of dataframes containing the data for measurement sequence 
         """
         files = sorted(os.listdir(self.path))
+        print()
         print("No. of files to be processed are: ", len(files), end ="\n")
         count  = 0
         data = []
@@ -45,6 +46,7 @@ class pipeline_Part_One():
             dup_path = self.path
         print()
         print("No. of files processed are: ", count)
+        print()
         return data
 
     def preprocess_Testruns(self, file_data):
@@ -137,11 +139,23 @@ class pipeline_Part_One():
         Output :
 
         """
+        print()
+        print("Reading the measurement sequence...")
+        print()
         file_data = self.read_Textfiles()
+        print()
+        print("Preprocessing the measurement sequence...")
+        print()
         file_data = self.preprocess_Testruns(file_data)
         labels = []
+        print()
+        print("Processing every test run through PCA and DBSCAN...")
+        print()
         for each_testrun in file_data:
             pca_values = self.perform_PCA(each_testrun)
             lbls, _, _ = self.perform_DBSCAN(pca_values)
             labels.append(lbls)
+        print()
+        print("Processing through pipeline 1 complete")
+        print()
         return file_data, labels
