@@ -65,10 +65,11 @@ class pipeline_Part_One():
                            'WhlRPM_FR', 'WhlRPM_RL', 'WhlRPM_RR', 'EngRPM']
         
         for each_file in range(len(file_data)):
-            cols = file_data[each_file]
+            cols = list(file_data[each_file])
             for each_col in cols:
                 if each_col not in needed_features:
                     file_data[each_file] = file_data[each_file].drop(columns=each_col).dropna(axis='index')
+        #print(list(file_data[0]))
         return file_data
 
     def perform_PCA(self, input_values):
@@ -88,7 +89,6 @@ class pipeline_Part_One():
         """
         np_data = input_values.to_numpy()
         np_data_std = (np_data-np.mean(np_data, axis = 0))/np.std(np_data, axis = 0)
-        np_data_std = np_data
         cov_matrx = (np_data_std-np.mean(np_data_std, axis =0)).T.dot(np_data_std-np.mean(np_data_std, axis =0)) / (np_data_std.shape[0]-1)
         eigen_vals, eigen_vecs = np.linalg.eig(cov_matrx)
         eigen_tuples = [(eigen_vals[idx], eigen_vecs[:, idx]) for idx in range(len(eigen_vals))]
@@ -102,6 +102,7 @@ class pipeline_Part_One():
                 no_dim += 1
             else:
                 break
+        #print("num of dim: ", no_dim)
         no_dim = 9
         W_matrix = np.zeros(shape = (len(eigen_vals),1))
         for idx, each_tuple in enumerate(eigen_tuples):
